@@ -1,0 +1,41 @@
+Required Images (20 files):
+
+    stopsign.jpg
+
+    yieldsign.jpg
+
+    noentry.jpg
+
+    speedlimit60.jpg
+
+    noovertaking.jpg
+
+    pedestriancrossing.jpg
+
+    noleftturn.jpg
+
+    onewayleft.jpg
+
+    trafficcircleahead.jpg
+
+    noparking.jpg
+
+    nostopping.jpg
+
+    slipperyroad.jpg
+
+    schoolcrossing.jpg
+
+    animalscrossing.jpg
+
+    roadnarrows.jpg
+
+    steephill.jpg
+
+    railwaycrossing.jpg
+
+    trafficlightsahead.jpg
+
+    residentialarea.jpg
+
+    minimumspeed.jpg

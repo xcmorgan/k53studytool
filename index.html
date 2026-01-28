@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K53 Test Memo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .button-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 5%;
+            z-index: 10;
+        }
+
+        .page-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            margin-bottom: 20px;
+            padding-left: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .nav-button {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            width: 180px;
+            text-align: left;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .nav-button:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #aaa;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .footer-text {
+            margin-bottom: 5px;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .button-container {
+                padding-left: 10%;
+            }
+            
+            .nav-button {
+                width: 160px;
+                padding: 10px 20px;
+            }
+            
+            .page-subtitle {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-container {
+                padding-left: 5%;
+            }
+            
+            .nav-button {
+                width: 140px;
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .page-subtitle {
+                font-size: 10px;
+            }
+            
+            .footer {
+                padding: 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="button-container">
+        <div class="page-subtitle">K53 Study Tool • Light Motor Vehicles Only</div>
+        <a href="memo.html" class="nav-button" id="practice-btn">Practice Questions</a>
+        <a href="https://idrivingschool.co.za/wp-content/uploads/2024/08/iDriving-School-K53_optimized.pdf" 
+           target="_blank" class="nav-button" id="pdf-btn">K53 PDF</a>
+        <a href="about.html" class="nav-button" id="about-btn">About</a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-text">K53 Learners License Study Tool</div>
+        <div class="copyright">© 2026 k53memo.co.za | Practice Only - Not an Official Test</div>
+    </footer>
+
+    <script>
+        // Button click effects only
+        document.querySelectorAll('.nav-button').forEach(button => {
+            // Click effect
+            button.addEventListener('click', function(e) {
+                // Add ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.2);
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+            
+            // Touch support
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'translateX(10px) scale(0.95)';
+                this.style.background = 'rgba(0, 0, 0, 1)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = 'translateX(10px)';
+                    this.style.background = 'rgba(0, 0, 0, 0.9)';
+                }, 100);
+            });
+        });
+        
+        // Add ripple animation to style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

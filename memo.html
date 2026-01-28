@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K53 Learner's License - Study Tool</title>
+    <style>
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Slim Top Bar */
+        .top-bar {
+            background: #000;
+            border-bottom: 1px solid #222;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 60px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-sub {
+            color: #888;
+            font-size: 12px;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            padding: 8px 20px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background: #222;
+            border-color: #444;
+        }
+        
+        .nav-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        /* Progress Bar - Slim */
+        .progress-section {
+            margin-bottom: 40px;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .progress-label {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+        }
+        
+        .progress-count {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 2px;
+            background: #222;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content Cards */
+        .question-section {
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .question-card {
+            margin-bottom: 20px;
+        }
+        
+        .question-header {
+            padding: 24px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .category {
+            background: #222;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .question-number {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .question-body {
+            padding: 24px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        /* Image Container - Minimal */
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .sign-image {
+            max-width: 100%;
+            max-height: 200px;
+            height: auto;
+            border-radius: 4px;
+            background: #fff;
+            padding: 12px;
+            display: inline-block;
+            border: 1px solid #333;
+        }
+        
+        .vehicle-controls-image {
+            max-width: 100%;
+            max-height: 220px;
+            height: auto;
+            border-radius: 4px;
+            background: #fff;
+            padding: 12px;
+            display: inline-block;
+            border: 1px solid #333;
+        }
+        
+        .image-name {
+            color: #888;
+            font-size: 14px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        /* Labels Grid - Clean */
+        .labels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+            padding: 20px;
+            background: #0a0a0a;
+            border-radius: 4px;
+            border: 1px solid #222;
+        }
+        
+        .label-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px;
+        }
+        
+        .label-number {
+            background: #fff;
+            color: #000;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        
+        .label-name {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* Answer Card - Clean */
+        .answer-card {
+            border-top: 2px solid #222;
+        }
+        
+        .answer-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #222;
+        }
+        
+        .answer-title {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .answer-title::before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .answer-body {
+            padding: 24px;
+        }
+        
+        .answer-text {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Controls - Minimal */
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .control-btn {
+            flex: 1;
+            padding: 16px;
+            border: 1px solid #222;
+            background: #111;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .control-btn:hover {
+            background: #222;
+            border-color: #333;
+            transform: translateY(-1px);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .next-btn {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        
+        .next-btn:hover {
+            background: #f0f0f0;
+            border-color: #f0f0f0;
+        }
+        
+        /* Completed Screen - Minimal */
+        .completed {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .completed-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .completed-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .completed-text {
+            color: #888;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .restart-btn {
+            background: #fff;
+            color: #000;
+            padding: 14px 36px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .restart-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+        
+        /* Footer - Slim */
+        footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+        
+        .footer-text {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px 15px;
+            }
+            
+            .top-container {
+                padding: 0 15px;
+                height: 56px;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .nav-btn {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+            
+            .question-header,
+            .question-body,
+            .answer-header,
+            .answer-body {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 18px;
+            }
+            
+            .labels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                padding: 16px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .sign-image {
+                max-height: 160px;
+            }
+            
+            .vehicle-controls-image {
+                max-height: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .top-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .question-text {
+                font-size: 17px;
+            }
+            
+            .answer-text {
+                font-size: 15px;
+            }
+            
+            .sign-image {
+                max-height: 140px;
+                padding: 8px;
+            }
+            
+            .vehicle-controls-image {
+                max-height: 160px;
+                padding: 8px;
+            }
+            
+            .labels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations - Subtle */
+        .question-card, .answer-card {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slim Top Bar -->
+    <div class="top-bar">
+        <div class="top-container">
+            <div class="logo">K53 STUDY TOOL<span class="logo-sub">| Light Motor Vehicles</span></div>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn active">Home</a>
+                <a href="about.html" class="nav-btn">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Progress -->
+        <div class="progress-section">
+            <div class="progress-info">
+                <div class="progress-label">Progress</div>
+                <div class="progress-count" id="progress-count">Question 1 of 60</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-section">
+            <!-- Question Card -->
+            <div class="card question-card" id="question-card">
+                <div class="question-header">
+                    <div class="category" id="category">Road Signs</div>
+                    <div class="question-number" id="question-number">1</div>
+                </div>
+                <div class="question-body">
+                    <div class="question-text" id="question-text">What does this sign mean?</div>
+                    <div id="image-container"></div>
+                    <div id="labels-container"></div>
+                </div>
+            </div>
+
+            <!-- Answer Card -->
+            <div class="card answer-card" id="answer-card">
+                <div class="answer-header">
+                    <div class="answer-title">Answer</div>
+                </div>
+                <div class="answer-body">
+                    <div class="answer-text" id="answer-text">Come to a complete halt at the stop line or before entering the intersection. Yield to all traffic and pedestrians before proceeding.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls" id="controls">
+            <button class="control-btn" id="prev-btn">
+                <span>←</span> Previous
+            </button>
+            <button class="control-btn next-btn" id="next-btn">
+                Next <span>→</span>
+            </button>
+        </div>
+
+        <!-- Completed Screen -->
+        <div class="completed" id="completed">
+            <div class="completed-icon">✓</div>
+            <div class="completed-title">Practice Completed</div>
+            <div class="completed-text">You've reviewed all 60 K53 questions. This study tool is for practice only. Refer to official K53 manuals for complete information.</div>
+            <button class="restart-btn" id="restart-btn">
+                <span>↻</span> Restart Practice
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-text">
+            K53 Learners Practice Tool • Not an Official Exam • Use with Official K53 Manuals • Light Motor Vehicles
+        </div>
+    </footer>
+
+    <script>
+        // Vehicle controls labels
+        const vehicleLabels = [
+            { number: 1, name: "Rear-view mirror" },
+            { number: 2, name: "Windscreen wiper" },
+            { number: 3, name: "Side-view mirror" },
+            { number: 4, name: "Steering wheel" },
+            { number: 5, name: "Indicator lever (Turn signal)" },
+            { number: 6, name: "Gear lever" },
+            { number: 7, name: "Handbrake (Parking brake)" },
+            { number: 8, name: "Clutch pedal" },
+            { number: 9, name: "Brake pedal" },
+            { number: 10, name: "Accelerator pedal (Gas)" },
+            { number: 11, name: "Hooter (Horn)" }
+        ];
+
+        // Questions data - Expanded to 60 questions (same as before)
+        const questions = [
+            // Road Signs (20 questions)
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "stopsign.jpg",
+                imageName: "Stop Sign",
+                answer: "Come to a complete halt at the stop line or before entering the intersection. Yield to all traffic and pedestrians before proceeding."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "yieldsign.jpg",
+                imageName: "Yield Sign",
+                answer: "Slow down and be prepared to stop. Yield to all traffic on the intersecting road."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "noentry.jpg",
+                imageName: "No Entry Sign",
+                answer: "No vehicles may enter this road at any time."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "speedlimit60.jpg",
+                imageName: "Speed Limit 60 km/h",
+                answer: "Maximum speed limit allowed is 60 km/h."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "noovertaking.jpg",
+                imageName: "No Overtaking Sign",
+                answer: "Overtaking is prohibited for the next 500m."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "pedestriancrossing.jpg",
+                imageName: "Pedestrian Crossing Sign",
+                answer: "Give way to any pedestrians on or about to enter the pedestrian crossing on your side of the road."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "noleftturn.jpg",
+                imageName: "No Left Turn Sign",
+                answer: "Turning left is prohibited at this intersection."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "onewayleft.jpg",
+                imageName: "One Way Left Sign",
+                answer: "One-way carriageway to the left. Proceed in the direction of the arrow."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "trafficcircleahead.jpg",
+                imageName: "Traffic Circle Ahead",
+                answer: "Traffic circle (roundabout) ahead. Prepare to yield to traffic already in the circle."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "noparking.jpg",
+                imageName: "No Parking Sign",
+                answer: "Parking is prohibited at any time of day or night."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "nostopping.jpg",
+                imageName: "No Stopping Sign",
+                answer: "Stopping is prohibited to ensure traffic flow and prevent obstruction of drivers' views."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "slipperyroad.jpg",
+                imageName: "Slippery Road Sign",
+                answer: "Slippery road ahead, especially when wet. Drive with caution."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "schoolcrossing.jpg",
+                imageName: "School Crossing Sign",
+                answer: "Scholar patrol ahead. Slow down and be prepared to stop for children crossing."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "animalscrossing.jpg",
+                imageName: "Animals Crossing Sign",
+                answer: "Animals may be crossing the road ahead. Proceed with caution."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "roadnarrows.jpg",
+                imageName: "Road Narrows Sign",
+                answer: "Road ahead narrows from both sides. Keep well to the left."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "steephill.jpg",
+                imageName: "Steep Hill Sign",
+                answer: "Steep downhill ahead. Change to a lower gear if necessary."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "railwaycrossing.jpg",
+                imageName: "Railway Crossing Sign",
+                answer: "Railway crossing ahead. Obey any traffic control signals at the crossing."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "trafficlightsahead.jpg",
+                imageName: "Traffic Lights Ahead Sign",
+                answer: "Traffic lights ahead. You may have to stop at a yellow or red light."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "residentialarea.jpg",
+                imageName: "Residential Area Sign",
+                answer: "Residential area ahead. Speed limit is 30km/h. Give way to all pedestrians."
+            },
+            {
+                category: "Road Signs",
+                question: "What does this sign mean?",
+                image: "minimumspeed.jpg",
+                imageName: "Minimum Speed Sign",
+                answer: "Regulates minimum speed of traffic. Do not drive slower than the speed indicated."
+            },
+            // Road Rules (25 questions) - Expanded with new topics
+            {
+                category: "Road Rules",
+                question: "When towing a trailer, when must you display a red flag?",
+                image: null,
+                imageName: null,
+                answer: "A red flag must be displayed if the distance between vehicles exceeds 1.8 meters. The flag must be clearly visible and tied securely."
+            },
+            {
+                category: "Road Rules",
+                question: "How far from the edge of the road must you park outside an urban area?",
+                image: null,
+                imageName: null,
+                answer: "Outside an urban area, you must park no more than 1.5 meters from the edge of the road, unless in a demarcated parking bay."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the maximum speed when towing a trailer without a solid tow bar?",
+                image: null,
+                imageName: null,
+                answer: "The maximum speed when towing without a solid tow bar is 30 km/h."
+            },
+            {
+                category: "Road Rules",
+                question: "How close to a fire hydrant may you park?",
+                image: null,
+                imageName: null,
+                answer: "You may not park within 1.5 meters of a fire hydrant on either side."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the maximum distance allowed between two vehicles being towed?",
+                image: null,
+                imageName: null,
+                answer: "The distance between two vehicles being towed may not exceed 3.5 meters."
+            },
+            {
+                category: "Road Rules",
+                question: "When are you allowed to use your main beam (bright lights)?",
+                image: null,
+                imageName: null,
+                answer: "Main beams can be used when there is no oncoming traffic and you're not following another vehicle closely. They must be dimmed for oncoming traffic and when following another vehicle."
+            },
+            {
+                category: "Road Rules",
+                question: "When is it acceptable to use your hooter (horn)?",
+                image: null,
+                imageName: null,
+                answer: "Horns can be used to prevent accidents or on grounds of safety, but not when there's a 'No Hooting' sign, to express annoyance, or in built-up areas between 11pm and 6am."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the maximum height limit for loads on goods vehicles?",
+                image: null,
+                imageName: null,
+                answer: "The maximum height for loads on goods vehicles is 4.3 meters from the ground. Anything higher requires special permission."
+            },
+            {
+                category: "Road Rules",
+                question: "How close to an intersection may you park?",
+                image: null,
+                imageName: null,
+                answer: "You may not park within 5 meters of an intersection."
+            },
+            {
+                category: "Road Rules",
+                question: "When must passengers wear seatbelts?",
+                image: null,
+                imageName: null,
+                answer: "All passengers must wear seatbelts at all times when the vehicle is in motion, regardless of where they are sitting."
+            },
+            {
+                category: "Road Rules",
+                question: "When towing, may you carry passengers in the towed vehicle?",
+                image: null,
+                imageName: null,
+                answer: "No, you may not carry passengers in a vehicle being towed."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the minimum tread depth required for tyres?",
+                image: null,
+                imageName: null,
+                answer: "At least 1mm across the entire width and circumference of the tyre."
+            },
+            {
+                category: "Road Rules",
+                question: "When must you display an emergency triangle?",
+                image: null,
+                imageName: null,
+                answer: "When your vehicle is stationary on a public road due to breakdown, at least 45 meters behind the vehicle."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the rule for yielding at a roundabout?",
+                image: null,
+                imageName: null,
+                answer: "Yield to all traffic approaching from the right (already in the roundabout)."
+            },
+            {
+                category: "Road Rules",
+                question: "How often should you check your mirrors?",
+                image: null,
+                imageName: null,
+                answer: "Every 5-8 seconds, and when approaching any potential hazard."
+            },
+            {
+                category: "Road Rules",
+                question: "When must you use your headlights?",
+                image: null,
+                imageName: null,
+                answer: "Between sunset and sunrise, and when visibility is poor (not clearly discernible at 150 metres)."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the legal blood alcohol limit for drivers?",
+                image: null,
+                imageName: null,
+                answer: "0.05 grams per 100ml of blood for non-professional drivers, 0.02 grams for professional drivers."
+            },
+            {
+                category: "Road Rules",
+                question: "What should you do if involved in an accident with injuries?",
+                image: null,
+                imageName: null,
+                answer: "Stop immediately, check for injuries, provide assistance, exchange details, and report to police within 24 hours."
+            },
+            {
+                category: "Road Rules",
+                question: "How close to a pedestrian crossing may you park?",
+                image: null,
+                imageName: null,
+                answer: "No parking within 9 meters of a pedestrian crossing on either side of the road."
+            },
+            {
+                category: "Road Rules",
+                question: "What should you do when traffic light changes to amber?",
+                image: null,
+                imageName: null,
+                answer: "Stop unless you are so close to the stop line that stopping might cause an accident."
+            },
+            {
+                category: "Road Rules",
+                question: "When are learner drivers allowed on freeways?",
+                image: null,
+                imageName: null,
+                answer: "Only if accompanied by a properly licensed driver."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the maximum speed limit on freeways?",
+                image: null,
+                imageName: null,
+                answer: "120 km/h on freeways, unless otherwise indicated."
+            },
+            {
+                category: "Road Rules",
+                question: "What width limit applies to loads on vehicles?",
+                image: null,
+                imageName: null,
+                answer: "Maximum width is 2.5 meters (2.6 meters for goods vehicles over 12,000kg). Anything wider requires special permission."
+            },
+            {
+                category: "Road Rules",
+                question: "When must you switch from main beam to dipped beam?",
+                image: null,
+                imageName: null,
+                answer: "Switch to dipped beam when approaching oncoming traffic, when following another vehicle within 150 meters, and in well-lit urban areas."
+            },
+            {
+                category: "Road Rules",
+                question: "What is the rule about using horns in residential areas at night?",
+                image: null,
+                imageName: null,
+                answer: "Horns should not be used in built-up areas between 11pm and 6am except in emergencies to prevent accidents."
+            },
+            // Vehicle Controls (15 questions)
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the rear-view mirror?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Allows the driver to see traffic behind the vehicle without turning their head."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the windscreen wiper?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Clears rain, snow, or debris from the windscreen to maintain visibility."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the side-view mirror?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Allows the driver to see vehicles in adjacent lanes and blind spots."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the steering wheel?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Controls the direction of the front wheels to steer the vehicle."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the indicator lever?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Activates turn signals to indicate intention to change direction or turn."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the gear lever?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Selects different gear ratios to match the vehicle's speed and load conditions."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the handbrake?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Keeps the vehicle stationary when parked and can be used as an emergency brake."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the clutch pedal?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Disengages the engine from the transmission to allow gear changes and smooth starting."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the brake pedal?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Applies the service brakes to slow down or stop the vehicle."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the accelerator pedal?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Controls the amount of fuel entering the engine, thereby controlling the vehicle's speed."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the function of the hooter (horn)?",
+                image: "vehiclecontrols.jpg",
+                imageName: "Vehicle Controls Diagram",
+                answer: "Produces a warning sound to alert other road users. Should only be used to prevent accidents, not to express annoyance."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What does the fuel gauge indicate?",
+                image: null,
+                imageName: null,
+                answer: "Shows the amount of fuel remaining in the vehicle's fuel tank."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What does the speedometer show?",
+                image: null,
+                imageName: null,
+                answer: "Shows the vehicle's current speed in kilometers per hour (km/h)."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What is the purpose of the temperature gauge?",
+                image: null,
+                imageName: null,
+                answer: "Shows the engine coolant temperature to prevent overheating."
+            },
+            {
+                category: "Vehicle Controls",
+                question: "What does the tachometer indicate?",
+                image: null,
+                imageName: null,
+                answer: "Shows the engine speed in revolutions per minute (RPM). Helps with efficient gear changing."
+            }
+        ];
+
+        // DOM Elements
+        const categoryEl = document.getElementById('category');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const imageContainer = document.getElementById('image-container');
+        const labelsContainer = document.getElementById('labels-container');
+        const answerTextEl = document.getElementById('answer-text');
+        const progressFill = document.getElementById('progress-fill');
+        const progressCount = document.getElementById('progress-count');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const completedDiv = document.getElementById('completed');
+        const restartBtn = document.getElementById('restart-btn');
+        const controlsDiv = document.getElementById('controls');
+
+        // Current question index
+        let currentQuestionIndex = 0;
+
+        // Initialize the app
+        function init() {
+            updateQuestion();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartMemo);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', handleKeyPress);
+            
+            // Touch support
+            setupTouchEvents();
+        }
+
+        // Update question display
+        function updateQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            // Update question info
+            categoryEl.textContent = question.category;
+            questionNumberEl.textContent = currentQuestionIndex + 1;
+            questionTextEl.textContent = question.question;
+            answerTextEl.textContent = question.answer;
+            
+            // Clear containers
+            imageContainer.innerHTML = '';
+            labelsContainer.innerHTML = '';
+            
+            // Update image
+            if (question.image) {
+                const img = document.createElement('img');
+                img.src = question.image;
+                img.alt = question.imageName || question.category;
+                img.className = question.image === 'vehiclecontrols.jpg' ? 'vehicle-controls-image' : 'sign-image';
+                imageContainer.appendChild(img);
+                
+                // Add image name
+                if (question.imageName) {
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'image-name';
+                    nameDiv.textContent = question.imageName;
+                    imageContainer.appendChild(nameDiv);
+                }
+                
+                // Add labels for vehicle controls
+                if (question.image === 'vehiclecontrols.jpg') {
+                    const labelsGrid = document.createElement('div');
+                    labelsGrid.className = 'labels-grid';
+                    labelsGrid.innerHTML = vehicleLabels.map(label => `
+                        <div class="label-item">
+                            <div class="label-number">${label.number}</div>
+                            <div class="label-name">${label.name}</div>
+                        </div>
+                    `).join('');
+                    labelsContainer.appendChild(labelsGrid);
+                }
+            }
+            // No image = no placeholder text
+            
+            // Update progress
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressCount.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            
+            // Update button states
+            prevBtn.disabled = currentQuestionIndex === 0;
+            prevBtn.style.opacity = currentQuestionIndex === 0 ? '0.5' : '1';
+            
+            // Update next button text
+            nextBtn.innerHTML = currentQuestionIndex === questions.length - 1 ? 
+                'Finish <span>→</span>' : 'Next <span>→</span>';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            } else {
+                // Show completion screen
+                document.querySelector('.question-section').style.display = 'none';
+                controlsDiv.style.display = 'none';
+                completedDiv.style.display = 'block';
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                updateQuestion();
+            }
+        }
+
+        // Restart memo
+        function restartMemo() {
+            currentQuestionIndex = 0;
+            document.querySelector('.question-section').style.display = 'block';
+            controlsDiv.style.display = 'flex';
+            completedDiv.style.display = 'none';
+            updateQuestion();
+        }
+
+        // Handle keyboard navigation
+        function handleKeyPress(e) {
+            if (e.key === 'ArrowLeft') {
+                showPreviousQuestion();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                showNextQuestion();
+            }
+        }
+
+        // Setup touch events
+        function setupTouchEvents() {
+            let touchStartX = 0;
+            
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].clientX;
+            });
+            
+            document.addEventListener('touchend', e => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) { // Minimum swipe distance
+                    if (diff > 0) {
+                        // Swipe left - next
+                        showNextQuestion();
+                    } else {
+                        // Swipe right - previous
+                        showPreviousQuestion();
+                    }
+                }
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
